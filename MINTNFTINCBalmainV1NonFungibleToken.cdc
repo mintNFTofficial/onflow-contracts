@@ -61,7 +61,7 @@ pub resource NFT: NonFungibleToken.INFT {
 
         post {
                 (result == nil) || (result?.id == id): 
-                    'Cannot borrow NFT reference: The ID of the returned reference is incorrect'
+                    "Cannot borrow NFT reference: The ID of the returned reference is incorrect"
             }
         }
     }
@@ -75,7 +75,7 @@ pub resource NFT: NonFungibleToken.INFT {
         }
 
         pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT {
-            let token <- self.ownedNFTs.remove(key: withdrawID) ?? panic('Cannot withdraw: NFT does not exist in the collection')
+            let token <- self.ownedNFTs.remove(key: withdrawID) ?? panic("Cannot withdraw: NFT does not exist in the collection")
             emit Withdraw(id: token.id, from: self.owner?.address)
             return <-token
         }
